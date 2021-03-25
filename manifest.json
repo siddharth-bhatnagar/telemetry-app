@@ -3,12 +3,12 @@
     "name": "Telemetry App PWA",
     "icons": [
         {
-            "src": "public/images/logo.png",
+            "src": "docs/images/logo.png",
             "type": "image/png",
             "sizes": "1024x1024"
         }
     ],
-    "start_url": "/public",
+    "start_url": "/docs",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
