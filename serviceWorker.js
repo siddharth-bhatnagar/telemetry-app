@@ -2,7 +2,7 @@
 const CACHE_NAME = "version-1";
 
 // Assets to be Cached
-const cacheAssets = ["telemetry-app/index.html", "telemetry-app/offline.html","telemetry-app/images/logo.png", "telemetry-app/src/data.html", "telemetry-app/src/diagnosticsManager.html", "telemetry-app/src/state.html", "telemetry-app/src/app.js"];
+const cacheAssets = ["index.html", "offline.html","images/logo.png", "data.html", "diagnosticsManager.html", "state.html", "app.js"];
 
 const self = this;
 
@@ -23,7 +23,7 @@ self.addEventListener("fetch", (event) => {
         caches.match(event.request)
             .then(() => {
                 return fetch(event.request)
-                .catch(() => caches.match("telemetry-app/offline.html"))
+                .catch(() => caches.match("offline.html"))
             })
     )
 });
