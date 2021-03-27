@@ -1,6 +1,6 @@
 {
     "short_name": "Telemetry App",
-    "name": "Telemetry App PWA",
+    "name": "SystemInfo PWA",
     "icons": [
         {
             "src": "images/logo.png",
@@ -8,7 +8,7 @@
             "sizes": "1024x1024"
         }
     ],
-    "start_url": ".",
+    "start_url": "./docs/pageData.html",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"

@@ -2,7 +2,7 @@
 const CACHE_NAME = "version-1";
 
 // Assets to be Cached
-const cacheAssets = ["index.html", "offline.html", "images/logo.png", "data.html", "diagnosticsManager.html", "state.html", "app.js"];
+const urlsToCache = ["./images/logo.png", "./docs/main.js", "./docs/pageData.html", "./docs/pageDiagnostics.html", "./docs/pageState.html"];
 
 const self = this;
 
@@ -17,7 +17,33 @@ self.addEventListener("install", (event) => {
     )
 });
 
-// Activate the SW
+// Listen for requests
+self.addEventListener("fetch", (event) => {
+    event.respondWith(
+        caches.match(event.request)
+            .then((response) => {
+                // Cache hit - return response
+                if (response) {
+                    return response;
+                }
+                return fetch(event.request).then((response) => {
+                    if (!response || response.status !== 200 || response.type !== 'basic') {
+                        return response;
+                    }
+                    let responseToCache = response.clone();
+                    caches.open(CACHE_NAME)
+                        .then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+
+                    return response;
+                });
+            })
+    );
+});
+
+
+// Activate SW - cache management step
 self.addEventListener("activate", (event) => {
     const cacheWhiteList = [];
     cacheWhiteList.push(CACHE_NAME);
@@ -30,16 +56,5 @@ self.addEventListener("activate", (event) => {
                 }
             })
         ))
-    )
-});
-
-// Listen for Requests
-self.addEventListener("fetch", (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(() => {
-                return fetch(event.request)
-                    .catch(() => caches.match("offline.html"))
-            })
     )
 });
