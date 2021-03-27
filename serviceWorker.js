@@ -2,7 +2,7 @@
 const CACHE_NAME = "version-1";
 
 // Assets to be Cached
-const urlsToCache = ["./images/logo.png", "./docs/main.js", "./docs/index.html", "./docs/pageDiagnostics.html", "./docs/pageState.html"];
+const urlsToCache = ["./images/logo.png", "./main.js", "./index.html", "./pageDiagnostics.html", "./pageState.html"];
 
 const self = this;
 
