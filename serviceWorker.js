@@ -2,7 +2,7 @@
 const CACHE_NAME = "version-1";
 
 // Assets to be Cached
-const cacheAssets = ["index.html", "offline.html","images/logo.png", "data.html", "diagnosticsManager.html", "state.html", "app.js"];
+const cacheAssets = ["index.html", "offline.html", "images/logo.png", "data.html", "diagnosticsManager.html", "state.html", "app.js"];
 
 const self = this;
 
@@ -17,17 +17,6 @@ self.addEventListener("install", (event) => {
     )
 });
 
-// Listen for Requests
-self.addEventListener("fetch", (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(() => {
-                return fetch(event.request)
-                .catch(() => caches.match("offline.html"))
-            })
-    )
-});
-
 // Activate the SW
 self.addEventListener("activate", (event) => {
     const cacheWhiteList = [];
@@ -36,10 +25,21 @@ self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => Promise.all(
             cacheNames.map((cacheName) => {
-                if(!cacheWhiteList.includes(cacheName)){
+                if (!cacheWhiteList.includes(cacheName)) {
                     return caches.delete(cacheName);
                 }
             })
         ))
+    )
+});
+
+// Listen for Requests
+self.addEventListener("fetch", (event) => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(() => {
+                return fetch(event.request)
+                    .catch(() => caches.match("offline.html"))
+            })
     )
 });
