@@ -1,0 +1,74 @@
+body {
+    font-family: "Roboto", Avenir, Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: #444444;
+    height: 100vh;
+    width: 100%;
+    padding: 3em;
+}
+
+#app-container {
+    height: 100%;
+    width: 100%;
+    background-color: #212529;
+    border-radius: 1.5em;
+    display: flex;
+    overflow: hidden;
+}
+
+#app-sidebar {
+    flex: 0 0 20%;
+    background-color: #2a2e32;
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    float: left;
+    height: 1.2em;
+    margin-right: 0.25em;
+    fill: pink;
+}
+
+#heading {
+    color: #ffffff;
+    float: right;
+}
+
+.metric-card-data {
+    background-color: #52708a;
+    margin-top: 2em;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.metric-card-memory {
+    background-color: #3a6cd7;
+    margin-top: 2em;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.metric-card-cpu {
+    background-color: #141414;
+    margin-top: 2em;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.cpu-graph {
+    background-color: #2a2e32;
+}

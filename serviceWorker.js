@@ -17,33 +17,18 @@ self.addEventListener("install", (event) => {
     )
 });
 
-// Listen for requests
+// Listen for Requests
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request)
-            .then((response) => {
-                // Cache hit - return response
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).then((response) => {
-                    if (!response || response.status !== 200 || response.type !== 'basic') {
-                        return response;
-                    }
-                    let responseToCache = response.clone();
-                    caches.open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
-
-                    return response;
-                });
+            .then(() => {
+                return fetch(event.request)
+                    .catch(() => caches.match("offline.html"))
             })
-    );
+    )
 });
 
-
-// Activate SW - cache management step
+// Activate the SW
 self.addEventListener("activate", (event) => {
     const cacheWhiteList = [];
     cacheWhiteList.push(CACHE_NAME);
